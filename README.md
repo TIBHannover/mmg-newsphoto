@@ -1,4 +1,4 @@
-Multimodal Geolocation Estimation of News Photos
+## Multimodal Geolocation Estimation of News Photos
 
 ## Installation
 
