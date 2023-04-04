@@ -10,16 +10,12 @@ root = Path(os.path.dirname(__file__))
 
 def get_parser():
     parser = argparse.ArgumentParser(description='T-Freq')
-    # parser.add_argument('--dir_val_texts', default='/nfs/home/tahmasebzadehg/mmg_news_dataset/text_splits/val')
-    parser.add_argument('--dir_train_texts', default='/nfs/home/tahmasebzadehg/mmg_news_dataset/text_splits/train')
-    parser.add_argument('--dir_test_texts', default='/nfs/home/tahmasebzadehg/mmg_news_dataset/text_splits/test')
-    parser.add_argument('--dir_test_h5', default='/nfs/home/tahmasebzadehg/mmg_news_dataset/h5_splits/test')
-
-    parser.add_argument('--dir_results', default="/nfs/home/tahmasebzadehg/mmg_ecir/t_freq/output")
-    # parser.add_argument('--path_test_images', default="/nfs/home/tahmasebzadehg/image_splits/test")
-    # parser.add_argument('--path_data_locs', default="/nfs/home/tahmasebzadehg/mmg_ecir/outputss/data_locs.json")
+    parser.add_argument('--dir_train_texts', default='mmg_news_dataset/text_splits/train')
+    parser.add_argument('--dir_test_texts', default='mmg_news_dataset/text_splits/test')
+    parser.add_argument('--dir_test_h5', default='mmg_news_dataset/h5_splits/test')
+    parser.add_argument('--dir_results', default="mmg_ecir/t_freq/output")
     parser.add_argument('--save_tags_t_freq_wikidata', default=False)
-    parser.add_argument('--coords_history', default="/nfs/home/tahmasebzadehg/mmg_news_dataset/info/coords_history.json")
+    parser.add_argument('--coords_history', default="mmg_news_dataset/info/coords_history.json")
     return parser
 
 parser = get_parser()
@@ -35,7 +31,6 @@ def update_tag(tag, output_tag_count_per_cell):
     output_tag_count_per_cell[tag['wd_id']] = {
         'wd_label':tag['wd_label'],
         'wdimage': tag['wdimage'],
-        # 'reference_images': tag['reference_images'],
         'type_wikidata': tag['type_wikidata'],
         'locs': {'city':{}, 'country':{}, 'continent':{}}
         }
@@ -51,9 +46,8 @@ def fix_self(loc):
         return loc
     return loc
 
-# per tag in body (per article), count how many times the image label (city, country, continent) has seen this tag
+
 def update_tag_count_per_loc(output_tag_count_per_loc, loc, body_entities_counts):
-    # body_entities_counts: the number of times each entity is mentioned
     for tag_wd_id in body_entities_counts:
         tag = body_entities_counts[tag_wd_id]
         
