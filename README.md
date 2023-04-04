@@ -2,9 +2,9 @@
 
 ## Contents
 - [Installation](#Installation)
-- [Download Data & Checkpoints](#Download Data & Checkpoints)
-- [Reproduce Results](#Reproduce Results)
-- [Training](#Training)
+- [Download Data & Checkpoints] TODO
+- [Reproduce Results] TODO
+- [Training] TODO
 
 ## Installation
 
@@ -15,10 +15,4 @@ python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 ```
-
-## Download Data & Checkpoints
-
-## Reproduce Results
-
-## Training
 
