@@ -1,6 +1,5 @@
 import os
 import sys
-# from bn_args import get_parser
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 import time
 import random
@@ -24,17 +23,16 @@ ROOT_PATH = Path(os.path.dirname(__file__))
 def get_parser():
     parser = argparse.ArgumentParser(description='BreakingNews')
     # paths
-    parser.add_argument('--data_path', default=f'/nfs/home/tahmasebzadehg/mmg_news_dataset/h5_splits')
+    parser.add_argument('--data_path', default=f'mmg_news_dataset/h5_splits')
     parser.add_argument('--dataset_version', default='v1')
-    # parser.add_argument('--snapshots', default=f'{root}/../mmg_news/experiments/snapshots', type=str)
     parser.add_argument('--snapshots', default=f'{ROOT_PATH}/experiments/snapshots', type=str)
     parser.add_argument('--test_results', default=f'{ROOT_PATH}/evaluation', type=str)
-    parser.add_argument('--images_dir', default=f'/nfs/home/tahmasebzadehg/mmg_news_dataset/image_splits', type=str)
+    parser.add_argument('--images_dir', default=f'mmg_news_dataset/image_splits', type=str)
     parser.add_argument('--logging_path', default=f'{ROOT_PATH}/log', type=str)
-    parser.add_argument('--all_locations', default=f'/nfs/home/tahmasebzadehg/mmg_news_dataset/info/labels.json', type=str)
+    parser.add_argument('--all_locations', default=flabels.json', type=str)
     parser.add_argument('--freeze_first_layers_image',default=True, type=bool)
     parser.add_argument('--freeze_all_image',default=False, type=bool)
-    parser.add_argument('--bn_mmg_to_coord', default= '/nfs/home/tahmasebzadehg/mmg_news_dataset/info/bn_mmg_to_coord.json')
+    parser.add_argument('--bn_mmg_to_coord', default= 'mmg_news_dataset/info/bn_mmg_to_coord.json')
         
     # general
     parser.add_argument('--workers', default=6, type=int)
@@ -45,15 +43,12 @@ def get_parser():
     # model
     parser.add_argument('--emb_dim', default=1024, type=int)
     parser.add_argument('--text_dim', default=768, type=int)
-    parser.add_argument('--attention_dim', default=6144, type=int)
-    parser.add_argument('--heads', default=4, type=int)
     parser.add_argument('--multi_head', default=6144, type=int)
     parser.add_argument('--n_classes_city', default=14331, type=int)  
     parser.add_argument('--n_classes_country', default=241, type=int)
-    parser.add_argument('--n_classes_continent', default=6, type=int) 
-    parser.add_argument('--n_classes_domain', default=10, type=int)  
+    parser.add_argument('--n_classes_continent', default=6, type=int)  
     parser.add_argument('--dropout', default=0.1, type=float)
-    parser.add_argument('--test_checkpoint', default='epoch_120_loss_1.95.pth.tar', type=str)
+    parser.add_argument('--test_checkpoint', default='', type=str)
 
     # train
     parser.add_argument('--lr', default=0.0000001, type=float) #default=0.00001
@@ -85,7 +80,6 @@ class Data_Loader(data.Dataset):
         self.partition = partition
         self.data_path = data_path
         self.fname = fname
-        # self.h5_path = f'{self.data_path}/{self.partition}/{self.fname}.h5'
         self.h5_path = f'{self.data_path}/{self.partition}/{self.partition}_bn.h5'
         
         with h5py.File(name=self.h5_path, mode='r') as  file:
@@ -100,7 +94,6 @@ class Data_Loader(data.Dataset):
             self.h5f = h5py.File(self.h5_path, mode='r')
 
         instanceId = self.ids[index]
-        # print(instanceId)
         grp = self.h5f[instanceId]
         clip = grp[f'image_clip'][()]
         all_clip = grp[f'all_images_clip'][()]
@@ -125,7 +118,6 @@ class Data_Loader(data.Dataset):
 
         item =  {
             'id': instanceId,
-            # 'image_clip': clip,
             'image_clip': avg_clip,
             'body': bert_body,
             'entity': bert_entity,
@@ -146,10 +138,7 @@ def save_file(fileName, file):
 # read parser
 parser = get_parser()
 bn_args = parser.parse_args()
-
-# create directories for train experiments
-logging_path = f'log'
-# Path(logging_path).mkdir(parents=True, exist_ok=True)
+logging_path = 'log'
 
 # set logger
 logging.basicConfig(format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
@@ -179,7 +168,6 @@ def main():  #inputs: bn_args.model_name , bn_args.multimodal_combine, bn_args.t
         # create directories for train experiments
         [mid_folder] = [f'{bn_args.task}_' if bn_args.task != 'hierarchical' else '']
 
-        # mid_folder +=  bn_args.model_name
         mid_folder += 'BN_' + bn_args.model_name
 
         if bn_args.model_name in ['m_body_clip', 'm_entity_clip', 'm_2bert_clip', 't_2bert']:
@@ -189,10 +177,7 @@ def main():  #inputs: bn_args.model_name , bn_args.multimodal_combine, bn_args.t
             path_snapshots = f'{bn_args.snapshots}/{mid_folder}'
             results_dir = f'{bn_args.test_results}/{mid_folder}/{bn_args.multimodal_combine}'
 
-        # model_path = f'/nfs/home/tahmasebzadehg/mmg/train1/experiments/snapshots/BN_m_2bert_clip/concat/epoch_110_loss_2.09.pth.tar'
-        # model_path = f'/nfs/home/tahmasebzadehg/mmg/train1/experiments/snapshots/BN_t_2bert/concat/epoch_108_loss_2.31.pth.tar'   
-        model_path = f'/nfs/home/tahmasebzadehg/mmg/train1/experiments/snapshots/BN_v_clip/epoch_107_loss_2.87.pth.tar'
-        # model_path = f'{path_snapshots}/{bn_args.test_checkpoint}'
+        model_path = f'{path_snapshots}/{bn_args.test_checkpoint}'
         
 
         if bn_args.model_name == 'v_clip':
@@ -245,7 +230,7 @@ def main():  #inputs: bn_args.model_name , bn_args.multimodal_combine, bn_args.t
             
             print(f'********{g} mean_gcd:', np.round(test_vers[f'{g}']['mean']/1000, 2),  '-  median:', np.round(test_vers[f'{g}']['median']/1000, 2) )
 
-            # save_file(f'/nfs/home/tahmasebzadehg/acmm22/train1/evaluation/bn/{bn_args.model_name}_list_ids_invalid.json', test_vers['city']['n_unk'])
+            save_file(f'evaluation/bn/{bn_args.model_name}_list_ids_invalid.json', test_vers['city']['n_unk'])
         
 
 
