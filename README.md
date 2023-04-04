@@ -1,5 +1,11 @@
 ## Multimodal Geolocation Estimation of News Photos
 
+## Contents
+- [Installation](#Installation)
+- Download Data & Checkpoints
+- Reproduce Results
+- Training
+
 ## Installation
 
 ``` bash
@@ -9,3 +15,5 @@ python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 ```
+
+
