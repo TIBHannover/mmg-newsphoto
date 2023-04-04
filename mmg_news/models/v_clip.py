@@ -3,7 +3,6 @@ import sys
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 import torch.nn as nn
 from args import get_parser
-# from base_model_geo_vision import get_base_model
 
 parser = get_parser()
 args = parser.parse_args()
