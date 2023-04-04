@@ -2,9 +2,9 @@
 
 ## Contents
 - [Installation](#Installation)
-- Download Data & Checkpoints TODO
-- Reproduce Results TODO
-- Training TODO
+- Download Data & Checkpoints (TODO)
+- Reproduce Results (TODO)
+- Training (TODO)
 
 ## Installation
 
