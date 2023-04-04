@@ -10,19 +10,19 @@ root = Path(os.path.dirname(__file__))
 
 def get_parser():
     parser = argparse.ArgumentParser(description='V-base')
-    parser.add_argument('--dir_val_texts', default='/nfs/home/tahmasebzadehg/mmg_news_dataset/text_splits/val')
-    parser.add_argument('--dir_train_texts', default='/nfs/home/tahmasebzadehg/mmg_news_dataset/text_splits/train')
-    parser.add_argument('--dir_test_texts', default='/nfs/home/tahmasebzadehg/mmg_news_dataset/text_splits/test')
-    parser.add_argument('--dir_test_h5', default='/nfs/home/tahmasebzadehg/mmg_news_dataset/h5_splits/test')
+    parser.add_argument('--dir_val_texts', default='mmg_news_dataset/text_splits/val')
+    parser.add_argument('--dir_train_texts', default='mmg_news_dataset/text_splits/train')
+    parser.add_argument('--dir_test_texts', default='mmg_news_dataset/text_splits/test')
+    parser.add_argument('--dir_test_h5', default='mmg_news_dataset/h5_splits/test')
 
-    parser.add_argument('--dir_results', default="/nfs/home/tahmasebzadehg/mmg_ecir/t_base/output")
-    parser.add_argument('--path_test_images', default="/nfs/home/tahmasebzadehg/image_splits/test")
-    parser.add_argument('--path_data_locs', default="/nfs/home/tahmasebzadehg/mmg_ecir/outputss/data_locs.json")
-    parser.add_argument('--path_mapped_Ys_to_cells_fine', default="/nfs/home/tahmasebzadehg/mmg_ecir/outputss/mapped_Ys_to_cells_fine.json")
+    parser.add_argument('--dir_results', default="t_base/output")
+    parser.add_argument('--path_test_images', default="image_splits/test")
+    parser.add_argument('--path_data_locs', default="data_locs.json")
+    parser.add_argument('--path_mapped_Ys_to_cells_fine', default="mapped_Ys_to_cells_fine.json")
     
     parser.add_argument('--topk_hierarchical_predictions', default=0)
     parser.add_argument('--save_geolocation_estimation', default=False)
-    parser.add_argument('--coords_history', default="/nfs/home/tahmasebzadehg/mmg_news_dataset/info/coords_history.json")
+    parser.add_argument('--coords_history', default="coords_history.json")
     parser.add_argument('--partition', default = 'fine' )
     
     return parser
