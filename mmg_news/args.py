@@ -6,13 +6,13 @@ root = Path(os.path.dirname(__file__))
 def get_parser():
     parser = argparse.ArgumentParser(description='MMG-News')
     # paths
-    parser.add_argument('--data_path', default=f'/nfs/home/tahmasebzadehg/mmg_news_dataset/h5_splits')
+    parser.add_argument('--data_path', default=f'mmg_news_dataset/h5_splits')
     parser.add_argument('--dataset_version', default='v1')
     parser.add_argument('--snapshots', default=f'{root}/experiments/snapshots', type=str)
     parser.add_argument('--test_results', default=f'{root}/evaluation', type=str)
-    parser.add_argument('--images_dir', default=f'/nfs/home/tahmasebzadehg/mmg_news_dataset/image_splits', type=str)
+    parser.add_argument('--images_dir', default=f'mmg_news_dataset/image_splits', type=str)
     parser.add_argument('--logging_path', default=f'{root}/log', type=str)
-    parser.add_argument('--all_locations', default=f'/nfs/home/tahmasebzadehg/mmg_news_dataset/info/labels.json', type=str)
+    parser.add_argument('--all_locations', default=f'mmg_news_dataset/info/labels.json', type=str)
     parser.add_argument('--freeze_first_layers_image',default=True, type=bool)
     parser.add_argument('--freeze_all_image',default=False, type=bool)
         
