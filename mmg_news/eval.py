@@ -22,10 +22,7 @@ ROOT_PATH = Path(os.path.dirname(__file__))
 # read parser
 parser = get_parser()
 args = parser.parse_args()
-
-# create directories for train experiments
-logging_path = f'log'
-# Path(logging_path).mkdir(parents=True, exist_ok=True)
+logging_path = 'log'
 
 # set logger
 logging.basicConfig(format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
@@ -46,8 +43,7 @@ if torch.cuda.is_available():
     torch.cuda.manual_seed_all(args.seed)
 
 # define device
-# device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-device = 'cpu'
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 def main():  #inputs: args.model_name , args.multimodal_combine, args.train_domain
 
