@@ -2,12 +2,9 @@ import torch.utils.data as data
 import sys
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-import numpy as np
 import h5py
-from PIL import Image
-import torchvision
 from pathlib import Path
-from args import get_parser
+from mmg_news.mmg_args import get_parser
 from utils.global_utils import return_info_cls
 parser = get_parser()
 args = parser.parse_args()
@@ -15,23 +12,18 @@ root = Path(os.path.dirname(__file__))
 
 
 class Data_Loader(data.Dataset):
-    def __init__(self, data_path, partition, fname):
+    def __init__(self, data_path, fname):
 
         if data_path == None:
             raise Exception('No data path specified.')
         
-        self.h5f = None
-        self.partition = partition
-        self.data_path = data_path
-        self.fname = fname
-        with h5py.File(name=f'{self.data_path}/{self.partition}/{self.fname}_{args.dataset_version}.h5', mode='r') as  file:
-            self.ids = [id for id in file['ids']]
-            self.len_ids = len(self.ids)
-        
+        self.h5f = h5py.File(f'{data_path}/{fname}.h5', mode='r') 
+
+        # with h5py.File(name=f'{data_path}/{fname}.h5', mode='r') as  file:
+        self.ids = [id for id in self.h5f['ids']]
+        self.len_ids = len(self.ids)
 
     def __getitem__(self, index):
-
-        if self.h5f == None:  self.h5f = h5py.File(f'{self.data_path}/{self.partition}/{self.fname}_{args.dataset_version}.h5', 'r')
 
         instanceId = self.ids[index]
         if isinstance(instanceId, bytes):  instanceId = instanceId.decode()
