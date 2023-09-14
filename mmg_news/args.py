@@ -7,7 +7,6 @@ def get_parser():
     parser = argparse.ArgumentParser(description='MMG-News')
     # paths
     parser.add_argument('--data_path', default=f'mmg_news_dataset/h5_splits')
-    parser.add_argument('--dataset_version', default='v1')
     parser.add_argument('--snapshots', default=f'{root}/experiments/snapshots', type=str)
     parser.add_argument('--test_results', default=f'{root}/evaluation', type=str)
     parser.add_argument('--images_dir', default=f'mmg_news_dataset/image_splits', type=str)
