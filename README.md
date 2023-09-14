@@ -5,8 +5,8 @@ Golsa Tahmasebzadeh, Sherzod Hakimov, Ralph Ewerth, Eric Müller-Budack: "Multim
 
 ## Contents
 - [Installation](#Installation)
-- [Download Data & Checkpoints](#Installation)
-- [Reproduce Results](#Reproduce_Results)
+- [Download Data & Checkpoints](#Download Data & Checkpoints)
+- [Reproduce Results](#Reproduce Results)
 - [Training](#Training)
 
 ## Installation
