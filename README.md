@@ -12,7 +12,7 @@ Golsa Tahmasebzadeh, Sherzod Hakimov, Ralph Ewerth, Eric Müller-Budack: "Multim
 ## Installation
 
 ``` bash
-git clone https://github.com/golsa-tahmasebzadeh/MMG-NewsPhoto1.git
+git clone https://github.com/TIBHannover/mmg-newsphoto.git
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
