@@ -18,7 +18,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 ## Download Data & Checkpoints
-Download the data and checkpoints for MMG-NewsPhoto from [here](https://tib.eu/cloud/s/zsdiw98easXY3Ax) and for BreakingNews from [here](https://tib.eu/cloud/s/2bANYcAw7eBtqGd).
+Download the data and checkpoints for MMG-NewsPhoto from [here](https://tib.eu/cloud/s/eN7WmCmYyFxt4WD) and for BreakingNews from [here](https://tib.eu/cloud/s/XrDd2oLTZQRJtNA).
 
 ## Reproduce Results
 To evaluate the models based on MMG-NewsPhoto dataset: 
